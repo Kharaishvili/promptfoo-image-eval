@@ -1,0 +1,43 @@
+name: promptfoo-eval
+
+on:
+    pull_request:
+    push:
+        branches: [main]
+
+jobs:
+    eval:
+        runs-on: ubuntu-latest
+        timeout-minutes: 15
+
+        steps:
+            - name: Checkout
+              uses: actions/checkout@v4
+
+            - name: Setup Node
+              uses: actions/setup-node@v4
+              with:
+                  node-version: 20
+                  cache: "npm"
+
+            - name: Install deps
+              run: npm ci
+
+            - name: Run Promptfoo eval
+              env:
+                  OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+                  ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+              run: |
+                  mkdir -p .promptfoo
+                  npx promptfoo eval --no-cache \
+                    --output .promptfoo/results.json
+
+            - name: Upload results
+              if: always()
+              uses: actions/upload-artifact@v4
+              with:
+                  name: promptfoo-results
+                  path: |
+                      .promptfoo/results.json
+                      .promptfoo/logs/**
+                  if-no-files-found: ignore
