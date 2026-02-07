@@ -32,6 +32,15 @@ jobs:
                   npx promptfoo eval --no-cache \
                     --output .promptfoo/results.json
 
+            - name: Print Promptfoo summary
+              run: |
+                  jq '{
+                    passed: .summary.testPassCount,
+                    failed: .summary.testFailCount,
+                    errors: .summary.testErrorCount,
+                    total: .summary.testCount
+                    }' .promptfoo/results.json
+
             - name: Upload results
               if: always()
               uses: actions/upload-artifact@v4
