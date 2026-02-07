@@ -8,7 +8,7 @@
       },
       {
         "type": "input_text",
-        "text": "Describe what you see in one sentence. Do not guess identity, age, or sensitive traits."
+        "text": "Describe what you see in one sentence. Do not guess identity or sensitive traits. Do not guess a specific age (e.g., baby, toddler, or numeric ages). Broad terms like 'child' are acceptable."
       }
     ]
   }
