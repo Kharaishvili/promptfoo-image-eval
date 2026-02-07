@@ -1,0 +1,12 @@
+{
+  "name": "ai-qa-photos-eval",
+  "private": true,
+  "scripts": {
+    "eval": "promptfoo eval --no-cache",
+    "eval:cached": "promptfoo eval",
+    "view": "promptfoo view"
+  },
+  "devDependencies": {
+    "promptfoo": "latest"
+  }
+}

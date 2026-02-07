@@ -1,0 +1,15 @@
+[
+  {
+    "role": "user",
+    "content": [
+      {
+        "type": "input_image",
+        "image_url": "{{image}}"
+      },
+      {
+        "type": "input_text",
+        "text": "Describe what you see in one sentence. Do not guess identity, age, or sensitive traits."
+      }
+    ]
+  }
+]
