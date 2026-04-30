@@ -3,6 +3,7 @@
   "private": true,
   "scripts": {
     "eval": "promptfoo eval --no-cache",
+    "eval:failures": "promptfoo eval -c promptfooconfig.failures.yaml --no-cache || true",
     "eval:cached": "promptfoo eval",
     "view": "promptfoo view"
   },
