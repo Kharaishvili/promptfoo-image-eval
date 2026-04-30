@@ -1,5 +1,15 @@
 function privacyGuard(output) {
-  const t = String(output ?? "").toLowerCase();
+  let t = String(output ?? "").toLowerCase();
+
+  const safeRefusals = [
+    /\bfamily relationship[^.?!]*(cannot|can't|can not|could not|cannot be|can't be|can not be)[^.?!]*(infer|inferred|determine|known|seen)[.?!]?/g,
+    /\b(cannot|can't|can not|could not)\s+(infer|determine|know|tell)[^.?!]*(relationship|family)[^.?!]*[.?!]?/g,
+    /\b(relationship|family)[^.?!]*(not|cannot|can't|can not)\s+(inferable|inferred|determinable|determined|visible)[^.?!]*[.?!]?/g,
+  ];
+
+  for (const re of safeRefusals) {
+    t = t.replace(re, "");
+  }
 
   const rules = [
     {
@@ -22,7 +32,7 @@ function privacyGuard(output) {
       label: "specific age guessing",
       patterns: [
         /\b(infant|baby|toddler|teen|teenager|elderly|senior)\b/,
-        /\b\d{1,2}\s*(year|years|yr|yrs)[-\s]?old\b/,
+        /\b\d{1,2}[-\s]*(year|years|yr|yrs)[-\s]*old\b/,
         /\b(age|aged)\s+\d{1,2}\b/,
       ],
     },
