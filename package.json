@@ -4,6 +4,7 @@
   "scripts": {
     "eval": "promptfoo eval --no-cache",
     "eval:failures": "promptfoo eval -c promptfooconfig.failures.yaml --no-cache || true",
+    "eval:models": "promptfoo eval -c promptfooconfig.model-regression.yaml --no-cache",
     "eval:cached": "promptfoo eval",
     "view": "promptfoo view"
   },

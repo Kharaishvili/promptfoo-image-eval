@@ -8,6 +8,12 @@
 
 ![Promptfoo expected failure](docs/screenshots/promptfoo-relationship-failure.png)
 
+### Model Regression Example
+
+The model-regression config runs the stable suite against both a baseline and target model. In this example, the baseline model is flagged for inferring the meeting topic instead of only describing visible content.
+
+![Model regression office meeting](docs/screenshots/model-regression-office-meeting.png)
+
 ### CI Workflow
 
 The GitHub Actions workflow runs the stable eval as a blocking gate, then runs expected-failure demos as a non-blocking check and uploads Promptfoo artifacts
@@ -64,16 +70,18 @@ This mirrors how subjective ML behaviors are evaluated in real products
 
 # Continuous Integration
 
-All evaluations run automatically via GitHub Actions:
-Executes Promptfoo on every pull request
+Evaluations run automatically via GitHub Actions on pull requests and pushes to
+`main`.
 
-- Fails the build if:
-- Any assertion fails
-- Rubric score falls below the threshold
-- Prints a summary directly in CI logs
-- Uploads full evaluation results as artifacts
+The workflow separates three evaluation modes:
 
-This ensures AI behavior regressions are caught before merging.
+- Stable eval: blocking CI gate for the main image-captioning suite.
+- Expected-failure demos: non-blocking guardrail examples that show unsafe
+  outputs being caught.
+- Model regression eval: non-blocking comparison across model versions.
+
+CI uploads Promptfoo result JSON and logs as artifacts so failures can be
+inspected after the run.
 
 # Running Locally
 
@@ -83,9 +91,33 @@ Set the required API keys as environment variables:
 ```bash
 export OPENAI_API_KEY=your_key_here
 export ANTHROPIC_API_KEY=your_key_here
+export PROMPTFOO_DISABLE_TELEMETRY=1
 
 npm install
-npx promptfoo eval --no-cache
+```
+
+Run the stable evaluation suite:
+
+```bash
+npm run eval
+```
+
+Run expected-failure guardrail demos:
+
+```bash
+npm run eval:failures
+```
+
+Run model-version regression tests:
+
+```bash
+npm run eval:models
+```
+
+Open the Promptfoo UI for the latest results:
+
+```bash
+npm run view
 ```
 
 # Project Status
