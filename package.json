@@ -8,6 +8,6 @@
     "view": "promptfoo view"
   },
   "devDependencies": {
-    "promptfoo": "latest"
+    "promptfoo": "0.120.20"
   }
 }

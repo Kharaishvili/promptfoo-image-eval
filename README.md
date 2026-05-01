@@ -1,3 +1,19 @@
+## Screenshots
+
+### Stable Evaluation Suite
+
+![Promptfoo stable results](docs/screenshots/promptfoo-stable-results.png)
+
+### Expected Failure Demo
+
+![Promptfoo expected failure](docs/screenshots/promptfoo-relationship-failure.png)
+
+### CI Workflow
+
+The GitHub Actions workflow runs the stable eval as a blocking gate, then runs expected-failure demos as a non-blocking check and uploads Promptfoo artifacts
+
+![GitHub Actions summary](docs/screenshots/github-actions-summary.png)
+
 # Promptfoo Image Description Evaluation
 
 This repository demonstrates a CI-gated evaluation framework for
