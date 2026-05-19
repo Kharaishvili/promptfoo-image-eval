@@ -102,16 +102,40 @@ Run the stable evaluation suite:
 npm run eval
 ```
 
+This writes `.promptfoo/results-stable.json`.
+
 Run expected-failure guardrail demos:
 
 ```bash
 npm run eval:failures
 ```
 
+This writes `.promptfoo/results-failures.json`.
+
 Run model-version regression tests:
 
 ```bash
 npm run eval:models
+```
+
+This writes `.promptfoo/results-model-regression.json`.
+
+Analyze Promptfoo JSON results and generate CSV reports:
+
+```bash
+npm run analyze
+```
+
+The analysis script writes:
+
+- `reports/eval-analysis/rows.csv`
+- `reports/eval-analysis/failures.csv`
+
+It uses pandas when available, but falls back to the Python standard library.
+To enable pandas-style reporting locally:
+
+```bash
+python3 -m pip install -r requirements-analysis.txt
 ```
 
 Open the Promptfoo UI for the latest results:

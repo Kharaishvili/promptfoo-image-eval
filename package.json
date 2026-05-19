@@ -2,9 +2,10 @@
   "name": "ai-qa-photos-eval",
   "private": true,
   "scripts": {
-    "eval": "promptfoo eval --no-cache",
-    "eval:failures": "promptfoo eval -c promptfooconfig.failures.yaml --no-cache || true",
-    "eval:models": "promptfoo eval -c promptfooconfig.model-regression.yaml --no-cache",
+    "eval": "promptfoo eval --no-cache --output .promptfoo/results-stable.json",
+    "eval:failures": "promptfoo eval -c promptfooconfig.failures.yaml --no-cache --output .promptfoo/results-failures.json || true",
+    "eval:models": "promptfoo eval -c promptfooconfig.model-regression.yaml --no-cache --output .promptfoo/results-model-regression.json",
+    "analyze": "python3 scripts/analyze_results.py",
     "eval:cached": "promptfoo eval",
     "view": "promptfoo view"
   },

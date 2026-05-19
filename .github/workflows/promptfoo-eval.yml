@@ -94,6 +94,15 @@ jobs:
                     echo "No model-regression results were generated."
                   fi
 
+            - name: Analyze Promptfoo results
+              if: always()
+              run: |
+                  python3 scripts/analyze_results.py \
+                    .promptfoo/results-stable.json \
+                    .promptfoo/results-failures.json \
+                    .promptfoo/results-model-regression.json \
+                    --out reports/eval-analysis
+
             - name: Upload results
               if: always()
               uses: actions/upload-artifact@v4
@@ -104,4 +113,5 @@ jobs:
                       .promptfoo/results-failures.json
                       .promptfoo/results-model-regression.json
                       .promptfoo/logs/**
+                      reports/eval-analysis/**
                   if-no-files-found: ignore
